@@ -32,7 +32,7 @@ export default defineConfig(({ mode }) => {
     plugins: [
       react(),
       ViteBlobStorage(env.VITE_USE_CDN === 'true', {
-        basePath: env.VITE_CDN_CDN_PATH, // your CDN URL or Blob Storage URL
+        basePath: env.VITE_BLOB_CDN_PATH, // your CDN URL or Blob Storage URL
         accountName: env.VITE_BLOB_ACCOUNT_NAME,
         accountKey: env.VITE_BLOB_ACCOUNT_KEY,
         containerName: env.VITE_BLOB_CONTAINER_NAME,

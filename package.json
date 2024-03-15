@@ -1,6 +1,5 @@
 {
   "name": "@metalist/vite-plugin-blob-storage",
-  "type": "module",
   "version": "1.0.1",
   "description": "Vite plugin for uploading files to Azure Blob Storage.",
   "author": "Neo Chang",
