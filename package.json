@@ -11,6 +11,8 @@
     "azure",
     "blob"
   ],
+  "homepage": "hhttps://github.com/chang0022/vite-plugin-blob-storage",
+  "repository": "https://github.com/chang0022/vite-plugin-blob-storage",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
