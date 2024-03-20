@@ -1,6 +1,7 @@
 import type { ConfigEnv, Plugin, ResolvedConfig, UserConfig } from 'vite';
 import { createContext } from './context';
 import Uploader from './uploader';
+import chalk from 'chalk';
 
 import type { Options } from './types';
 
@@ -25,6 +26,7 @@ export function ViteBlobStorage(enabled: boolean, userOptions: Options): Plugin 
     closeBundle: {
       async handler() {
         if (!vite.build.ssr && enabled) {
+          console.log(chalk.cyan(`Uploading files to blob storage...`));
           const uploader = new Uploader(options, vite);
           await uploader.run();
         }

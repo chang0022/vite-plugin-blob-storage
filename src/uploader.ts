@@ -47,7 +47,8 @@ export default class Uploader {
   }
 
   async uploadFile(fileName: string, filePath: string): Promise<BlobUploadCommonResponse> {
-    const blockBlobClient = this.containerClient!.getBlockBlobClient(fileName);
+    const nameWithPath = this.options.subPath ? `${this.options.subPath}/${fileName}` : fileName;
+    const blockBlobClient = this.containerClient!.getBlockBlobClient(nameWithPath);
     return await blockBlobClient.uploadFile(filePath, {
       blobHTTPHeaders: {
         blobContentType: lookup(fileName) || 'application/octet-stream',

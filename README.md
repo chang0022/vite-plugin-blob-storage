@@ -36,6 +36,7 @@ export default defineConfig(({ mode }) => {
         accountName: env.VITE_BLOB_ACCOUNT_NAME,
         accountKey: env.VITE_BLOB_ACCOUNT_KEY, // or sasToken: env.VITE_BLOB_SAS_TOKEN
         containerName: env.VITE_BLOB_CONTAINER_NAME,
+        subPath: env.VITE_BLOB_CONTAINER_SUB_PATH,
         excludes: ['index.html'],
       })
     ],
@@ -49,9 +50,10 @@ export default defineConfig(({ mode }) => {
 |           Name           |       Type        |        Default         | Required | Description                                                       |
 | :----------------------: | :---------------: | :--------------------: | :------: | :---------------------------------------------------------------- |
 |  **[`accountName`](#)**  |    `{String}`     |                        |   true   | The name of the Azure Storage account.                            |
-|  **[`accountKey`](#)**   |    `{String}`     |                        |   false   | The account key for the Azure Storage account.                    |
-|  **[`sasToken`](#)**   |    `{String}`     |                        |   false   | The SAS token for the Azure Storage account.                     |
+|  **[`accountKey`](#)**   |    `{String}`     |                        |  false   | The account key for the Azure Storage account.                    |
+|   **[`sasToken`](#)**    |    `{String}`     |                        |  false   | The SAS token for the Azure Storage account.                      |
 | **[`containerName`](#)** |    `{String}`     |                        |   true   | The name of the container.                                        |
+|    **[`subPath`](#)**    |    `{String}`     |                        |  false   | The subPath of the container.                                     |
 |   **[`excludes`](#)**    | `{Array[string]}` | ['.DS_Store', '*.map'] |  false   | excluded content 型                                               |
 |   **[`basePath`](#)**    |    `{String}`     |                        |  false   | The domain of Azure CDN will modify the base of the output files. |
 
@@ -62,13 +64,20 @@ export default defineConfig(({ mode }) => {
   - Consecutive hyphens are not allowed in the container name.
 
 - `excludes` Matching related files or folders. For detailed usage, please refer to: [micromatch](https://github.com/micromatch/micromatch)
+
   - `*.map` do not upload files with the `map` file extension.
 
 - `accountKey` and `sasToken`
+
   - The priority of `accountKey` is higher than `sasToken`.
   - `accountKey` and sasToken cannot be empty at the same time
 
----
+- `subPath`
+
+  - The subPath suggestion use the project name.
+  - The subPath can be used to distinguish different projects in the same container.
+  - The subPath container name must start with a letter or number and can only contain lowercase letters, numbers, and hyphens (-).
+  - The length of a container name can be from 3 to 63 characters.
 
 ## Thanks
 

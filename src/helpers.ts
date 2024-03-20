@@ -38,7 +38,7 @@ function isContainerName(name: string) {
 
 // validate clientConfig
 export function validateBlobClientConfig(config: BlobClientConfig): void {
-  const { accountName, accountKey, sasToken, containerName } = config;
+  const { accountName, accountKey, sasToken, containerName, subPath } = config;
 
   // accountKey 和 sasToken 不能同时为空
   if (!accountKey && !sasToken) {
@@ -51,5 +51,9 @@ export function validateBlobClientConfig(config: BlobClientConfig): void {
 
   if (!isContainerName(containerName)) {
     throw new Error('Invalid containerName');
+  }
+
+  if (subPath && !isContainerName(subPath)) {
+    throw new Error('Invalid subPath');
   }
 }

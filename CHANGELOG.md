@@ -1,3 +1,9 @@
+## 1.3.0 - 2024-03-20
+
+### Added
+
+- Configure support for `subPath`
+
 ## 1.2.0 - 2024-03-20
 
 ### Added
