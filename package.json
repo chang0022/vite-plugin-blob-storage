@@ -30,7 +30,8 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "build": "tsup src/index.ts --dts --format cjs,esm"
+    "build": "tsup src/index.ts --dts --format cjs,esm",
+    "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
     "vite": "^3.1.0 || ^4.0.0 || ^5.0.0"
