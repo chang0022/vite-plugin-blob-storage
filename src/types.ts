@@ -5,8 +5,18 @@ export interface BlobClientConfig {
   accountName: string
   /**
    * The account key for the Azure Storage account.
+   * @description
+   * - If the sasToken is not provided, the accountKey is required.
+   * - The priority of `accountKey` is higher than `sasToken`.
    */
-  accountKey: string
+  accountKey?: string
+  /**
+   * The SAS token for the Azure Storage account.\
+   * @description
+   * - If the accountKey is not provided, the sasToken is required.
+   * - The priority of `accountKey` is higher than `sasToken`.
+   */
+  sasToken?: string
   /**
    * The name of the container.
    * @description

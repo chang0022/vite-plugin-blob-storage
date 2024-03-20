@@ -7,9 +7,14 @@ import { logResult } from './log';
 
 import { getAllFilesInDirectory, getDirectoryFilesRecursive, validateBlobClientConfig } from './helpers';
 
-function getBlobServiceClient(accountName: string, accountKey: string) {
+function getBlobServiceClientWithKey(accountName: string, accountKey: string) {
   const sharedKeyCredential = new StorageSharedKeyCredential(accountName, accountKey);
   const blobServiceClient = new BlobServiceClient(`https://${accountName}.blob.core.windows.net`, sharedKeyCredential);
+  return blobServiceClient;
+}
+
+function getBlobServiceClientWithToken(accountName: string, sasToken: string) {
+  const blobServiceClient = new BlobServiceClient(`https://${accountName}.blob.core.windows.net?${sasToken}`);
   return blobServiceClient;
 }
 
@@ -31,8 +36,13 @@ export default class Uploader {
     this.options = options;
     this.vite = vite;
     validateBlobClientConfig(this.options);
-    const { accountName, accountKey } = this.options;
-    this.blobServiceClient = getBlobServiceClient(accountName, accountKey);
+    const { accountName, accountKey, sasToken } = this.options;
+    if (accountKey) {
+      this.blobServiceClient = getBlobServiceClientWithKey(accountName, accountKey);
+    } else {
+      this.blobServiceClient = getBlobServiceClientWithToken(accountName, sasToken!);
+    }
+
     this.directory = `${this.vite.root}/${this.vite.build.outDir}`;
   }
 

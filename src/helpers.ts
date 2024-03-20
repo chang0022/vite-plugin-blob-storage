@@ -38,10 +38,15 @@ function isContainerName(name: string) {
 
 // validate clientConfig
 export function validateBlobClientConfig(config: BlobClientConfig): void {
-  const { accountName, accountKey, containerName } = config;
+  const { accountName, accountKey, sasToken, containerName } = config;
 
-  if (!accountName || !accountKey || !containerName) {
-    throw new Error('Invalid clientConfig');
+  // accountKey 和 sasToken 不能同时为空
+  if (!accountKey && !sasToken) {
+    throw new Error('accountKey and sasToken cannot be empty at the same time');
+  }
+
+  if (!accountName || !containerName) {
+    throw new Error('accountName or containerName is empty');
   }
 
   if (!isContainerName(containerName)) {

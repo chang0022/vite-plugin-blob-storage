@@ -4,7 +4,7 @@
 
 ## Features
 
-- Supports Account Key, does not support SAS token.
+- Supports Account Key or SAS Token.
 - Supports modifying the base URL.
 
 ## Install
@@ -34,7 +34,7 @@ export default defineConfig(({ mode }) => {
       ViteBlobStorage(env.VITE_USE_CDN === 'true', {
         basePath: env.VITE_BLOB_CDN_PATH, // your CDN URL or Blob Storage URL
         accountName: env.VITE_BLOB_ACCOUNT_NAME,
-        accountKey: env.VITE_BLOB_ACCOUNT_KEY,
+        accountKey: env.VITE_BLOB_ACCOUNT_KEY, // or sasToken: env.VITE_BLOB_SAS_TOKEN
         containerName: env.VITE_BLOB_CONTAINER_NAME,
         excludes: ['index.html'],
       })
@@ -49,7 +49,8 @@ export default defineConfig(({ mode }) => {
 |           Name           |       Type        |        Default         | Required | Description                                                       |
 | :----------------------: | :---------------: | :--------------------: | :------: | :---------------------------------------------------------------- |
 |  **[`accountName`](#)**  |    `{String}`     |                        |   true   | The name of the Azure Storage account.                            |
-|  **[`accountKey`](#)**   |    `{String}`     |                        |   true   | he account key for the Azure Storage account.                     |
+|  **[`accountKey`](#)**   |    `{String}`     |                        |   false   | The account key for the Azure Storage account.                    |
+|  **[`sasToken`](#)**   |    `{String}`     |                        |   false   | The SAS token for the Azure Storage account.                     |
 | **[`containerName`](#)** |    `{String}`     |                        |   true   | The name of the container.                                        |
 |   **[`excludes`](#)**    | `{Array[string]}` | ['.DS_Store', '*.map'] |  false   | excluded content 型                                               |
 |   **[`basePath`](#)**    |    `{String}`     |                        |  false   | The domain of Azure CDN will modify the base of the output files. |
@@ -62,6 +63,10 @@ export default defineConfig(({ mode }) => {
 
 - `excludes` Matching related files or folders. For detailed usage, please refer to: [micromatch](https://github.com/micromatch/micromatch)
   - `*.map` do not upload files with the `map` file extension.
+
+- `accountKey` and `sasToken`
+  - The priority of `accountKey` is higher than `sasToken`.
+  - `accountKey` and sasToken cannot be empty at the same time
 
 ---
 
