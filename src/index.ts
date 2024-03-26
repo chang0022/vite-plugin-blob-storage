@@ -18,7 +18,7 @@ export function ViteBlobStorage(enabled: boolean, userOptions: Options): Plugin 
       return command === 'build' && enabled;
     },
     config(config: UserConfig) {
-      if (options.cdnUrl) config.base = options.cdnUrl;
+      if (options.cdnUrl && enabled) config.base = options.cdnUrl;
     },
     configResolved(config: ResolvedConfig) {
       vite = config;

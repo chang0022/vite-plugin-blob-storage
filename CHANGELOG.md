@@ -1,3 +1,9 @@
+## 1.3.1 - 2024-03-26
+
+### Changed
+
+- add `enabled` condition when setting base URL
+
 ## 1.3.0 - 2024-03-20
 
 ### Added
